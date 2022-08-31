@@ -31,5 +31,21 @@ namespace CompanyApp.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpGet("MultipleMapping")]
+        public async Task<IActionResult> GetCompaniesEmployeesMultipleMapping()
+        {
+            try
+            {
+                var company = await _companyRepo.GetCompaniesEmployeesMultipleMapping();
+
+                return Ok(company);
+            }
+            catch (Exception ex)
+            {
+                //log error
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
