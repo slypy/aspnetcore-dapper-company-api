@@ -3,12 +3,12 @@ using System.Data;
 
 namespace CompanyApp.Context
 {
-    internal class DapperContext
+    public class DapperContext
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
 
-        internal DapperContext(IConfiguration configuration)
+        public DapperContext(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("SqlConnection");
