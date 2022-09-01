@@ -14,7 +14,7 @@ namespace CompanyApp.Context
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
 
-        // Inject IConfiguration service
+        // Inject IConfiguration service - Dependency Injection
         public DapperContext(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -27,7 +27,8 @@ namespace CompanyApp.Context
         /// Creates a database connection using the connection string we have provided in appsettings.
         /// </summary>
         /// <returns></returns>
-        public IDbConnection CreateConnection()
-            => new SqlConnection(_connectionString);
+        public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
+
+
     }
 }

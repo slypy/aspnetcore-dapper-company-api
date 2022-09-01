@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CompanyApp.Controllers
 {
     [ApiController]
-    [Route("/api/[controller]")]
+    [Route("/api/companies")]
     public class CompaniesController : ControllerBase
     {
         private readonly ICompanyRepository _companyRepo;
@@ -14,6 +14,7 @@ namespace CompanyApp.Controllers
             _companyRepo = companyRepo;
         }
 
+        // GET /api/companies/{id}
         [HttpGet("{id}", Name = "CompanyById")]
         public async Task<IActionResult> GetCompany(int id)
         {
@@ -22,22 +23,6 @@ namespace CompanyApp.Controllers
                 var company = await _companyRepo.GetCompany(id);
                 if (company == null)
                     return NotFound();
-
-                return Ok(company);
-            }
-            catch (Exception ex)
-            {
-                //log error
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpGet("MultipleMapping")]
-        public async Task<IActionResult> GetCompaniesEmployeesMultipleMapping()
-        {
-            try
-            {
-                var company = await _companyRepo.GetCompaniesEmployeesMultipleMapping();
 
                 return Ok(company);
             }

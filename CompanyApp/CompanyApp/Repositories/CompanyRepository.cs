@@ -20,7 +20,7 @@ namespace CompanyApp.Repositories
             using (var connection = _context.CreateConnection())
             {
                 var company = await connection.QuerySingleOrDefaultAsync<Company>(query, new { id });
-
+                
                 return company;
             }
         }
