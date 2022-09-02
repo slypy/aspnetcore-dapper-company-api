@@ -87,7 +87,9 @@ The network.tcpport setting changes the TCP port where SQL Server listens for co
 Note we are using a virtual machine make sure to change the settings of the network type into **Bridge** or **Host-only** so that we can ping the connection of virtual machine (Linux) to the host (Linux|Windows) because **NAT** will give us a private IP address.
 
 To get our IP address under inet copy the IP address:
+
 `$ ifconfig`
+
 ```
 enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 192.168.1.8  netmask 255.255.255.0  broadcast 192.168.1.255
@@ -100,7 +102,9 @@ enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ```
 
 Now since our TCP port is configured, we will check the listening ports by typing: 
+
 `$ netstat -ln` to filter only listening TCP ports
+
 ```terminal
 Active Internet connections (only servers)
 Proto Recv-Q Send-Q Local Address           Foreign Address         State      
@@ -115,17 +119,20 @@ tcp6       0      0 [::]:4066               [::]:*                  LISTEN
 tcp6       0      0 ip6-localhost:ms-sql-m  [::]:*                  LISTEN     
 tcp6       0      0 ip6-localhost:1431      [::]:*                  LISTEN 
 ```
+
 In my end I am using port 4066 and it is now listening for our connection out of the virtual box.
 
 ## Connecting the SQL Server into our App (HOST)
 In the **appsettings.json** @jambrad is using the integrated security of Windows machine and we are using Linux with System Server Authentication.
 
 Replace the SQL script properties to:
+
 ```json
 "SqlConnection": "Server=tcp:192.168.1.8,4066;Database=CompanyDb;Integrated Security=false;User ID=SA;Password=*****;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False;Connection Timeout=30;"
 ```
 
 REFERENCES:
+
 https://docs.microsoft.com/en-us/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-linux-ver15&preserve-view=true
 
 https://stackoverflow.com/questions/34430550/a-connection-was-successfully-established-with-the-server-but-then-an-error-occ
